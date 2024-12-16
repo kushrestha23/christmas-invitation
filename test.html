@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Potluck Celebration 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background-color: #121212;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: url('https://t4.ftcdn.net/jpg/02/94/71/81/240_F_294718149_aIizeIOQuJAK2K79oJ7C0Ck0xTaDTxOu.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            color: #34db3f;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            animation: fadeSlideIn 2s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            opacity: 0;
+            animation: fadeSlideIn 2s ease-out 0.5s forwards;
+        }
+
+        .hero .location {
+            font-size: 1.5em;
+            margin-bottom: 2em;
+            color: #fff;
+            opacity: 0;
+            animation: fadeSlideIn 2s ease-out 1s forwards;
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            animation: fadeIn 2s ease-in-out 1.5s forwards;
+            opacity: 0;
+        }
+
+        .countdown-box {
+            background-color: rgba(209, 144, 24, 0.8);
+            color: #c4e036;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0 10px;
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            animation: flipIn 1s infinite alternate ease-in-out;
+        }
+
+        .countdown-box span {
+            display: block;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+
+        /* Sparkle Effect */
+        .sparkle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .sparkle div {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: sparkle-animation 3s infinite ease-in-out;
+        }
+
+        @keyframes sparkle-animation {
+            0% {
+                transform: scale(0) translateY(0);
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: scale(1.2) translateY(-20px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0) translateY(50px);
+                opacity: 0.5;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes flipIn {
+            0% {
+                transform: rotateX(90deg);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: rotateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div>
+            <h1>Welcome! Let's Celebrate Christmas 2024</h1>
+            <p>Join us for a Christmas potluck celebration</p>
+            <p class="location">@ 2921 Bancroft Road, Greater Sudbury</p>
+
+            <!-- Countdown Timer -->
+            <div id="countdown" class="countdown">
+                <div class="countdown-box" id="days-box">
+                    <div id="days">00</div>
+                    <span>Days</span>
+                </div>
+                <div class="countdown-box" id="hours-box">
+                    <div id="hours">00</div>
+                    <span>Hours</span>
+                </div>
+                <div class="countdown-box" id="minutes-box">
+                    <div id="minutes">00</div>
+                    <span>Minutes</span>
+                </div>
+                <div class="countdown-box" id="seconds-box">
+                    <div id="seconds">00</div>
+                    <span>Seconds</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sparkle Effect -->
+    <div class="sparkle">
+        <div style="top: 20%; left: 10%; width: 15px; height: 15px; animation-duration: 3s;"></div>
+        <div style="top: 40%; left: 40%; width: 20px; height: 20px; animation-duration: 4s;"></div>
+        <div style="top: 60%; left: 70%; width: 10px; height: 10px; animation-duration: 2.5s;"></div>
+        <div style="top: 80%; left: 30%; width: 25px; height: 25px; animation-duration: 5s;"></div>
+        <div style="top: 50%; left: 80%; width: 20px; height: 20px; animation-duration: 3.5s;"></div>
+    </div>
+
+    <script>
+        // Countdown Timer Logic
+        function updateCountdown() {
+            const eventDate = new Date("December 25, 2024 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>
