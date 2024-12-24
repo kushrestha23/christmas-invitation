@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        h1 {
+            margin: 20px;
+            color: #444;
+        }
+
+        .camera-section {
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .camera-section label {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .gallery-item a {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .gallery-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Share Your Memories</h1>
+    <p>Take a photo and share it in the gallery!</p>
+
+    <!-- Camera Section -->
+    <div class="camera-section">
+        <label for="file-input">Capture Photo</label>
+        <input type="file" id="file-input" accept="image/*" capture="camera">
+    </div>
+
+    <!-- Gallery Section -->
+    <div id="gallery" class="gallery">
+        <!-- Images will be displayed here -->
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const gallery = document.getElementById('gallery');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0]; // Get the file
+            if (file) {
+                const reader = new FileReader();
+
+                // When the file is loaded
+                reader.onload = function (e) {
+                    const fullImageURL = e.target.result; // Full resolution image URL
+
+                    // Create gallery item
+                    const galleryItem = document.createElement('div');
+                    galleryItem.classList.add('gallery-item');
+
+                    // Create thumbnail image
+                    const img = document.createElement('img');
+                    img.src = fullImageURL;
+                    img.alt = "Captured Photo";
+
+                    // Create download link
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = fullImageURL;
+                    downloadLink.download = `captured-photo-${Date.now()}.jpg`;
+                    downloadLink.textContent = "Download Full Image";
+
+                    // Append elements
+                    galleryItem.appendChild(img);
+                    galleryItem.appendChild(downloadLink);
+                    gallery.appendChild(galleryItem);
+                };
+
+                reader.readAsDataURL(file); // Read the file
+            }
+        });
+    </script>
+
+</body>
+
+</html>
